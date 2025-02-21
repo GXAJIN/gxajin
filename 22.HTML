@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>无限级别侧拉菜单</title>
+<style>
+
+ /* styles.css */
+body {
+  font-family: Arial, sans-serif;
+}
+ 
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+}
+ 
+.menu, .submenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ 
+.menu li, .submenu li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+ 
+.menu li a, .submenu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+ 
+.submenu {
+  display: none; /* 默认隐藏子菜单 */
+  padding-left: 20px; /* 缩进子菜单 */
+}
+
+</style>
+
+
+
+</head>
+<body>
+ 
+<div class="sidebar">
+  <ul class="menu">
+    <li><a href="#">主页</a></li>
+    <li><a href="#">关于我们</a></li>
+    <li><a href="#">服务</a>
+      <ul class="submenu">
+        <li><a href="#">Web 开发</a></li>
+        <li><a href="#">移动应用</a></li>
+        <li><a href="#">SEO</a>
+          <ul class="submenu">
+            <li><a href="#">关键词优化</a></li>
+            <li><a href="#">链接建设</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">联系我们</a></li>
+  </ul>
+</div>
+ 
+<script>
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+  var menuItems = document.querySelectorAll('.menu li'); // 获取所有菜单项元素
+  menuItems.forEach(function(item) { // 遍历每个菜单项元素并添加点击事件监听器
+    item.addEventListener('click', function(e) { // 当菜单项被点击时执行以下函数
+      e.stopPropagation(); // 阻止事件冒泡到父元素，避免触发父菜单的点击事件处理函数（如果有的话）
+      var submenu = this.querySelector('.submenu'); // 获取当前点击项的子菜单元素（如果有的话）
+      if (submenu) { // 如果存在子菜单，则切换其显示状态（展开/收起）
+        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block'; // 使用三元运算符切换显示状态（展开/收起）
+      } else { // 如果当前项没有子菜单，则阻止事件冒泡，避免触发父级菜单的点击事件处理函数（如果有的话）
+        e.stopPropagation(); // 阻止事件冒泡到父元素，避免触发父菜单的点击事件处理函数（如果有的话）
+      }      
+    });    
+  });    
+});    
+ 
+</script>
+</body>
+</html>
